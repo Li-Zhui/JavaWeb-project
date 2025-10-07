@@ -2,6 +2,8 @@ package com.itheima.controller;
 
 import cn.hutool.core.io.IoUtil;
 import com.itheima.pojo.User;
+import com.itheima.service.UserService;
+import com.itheima.service.impl.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 public class UserController {
-    @RequestMapping("/list")
+   /* @RequestMapping("/list")
     public List<User> list() throws  Exception {
         //1.加载并读取user.txt文件，获取用户数据
         //InputStream in = new FileInputStream(new File("D:\\code\\idea\\Web-project\\springboot-web-01\\src\\main\\resources"));
@@ -39,6 +41,20 @@ public class UserController {
         }).toList();
 
         //3.返回数据（json）
+        return  userList;
+        //服务器在将这个对象或者集合响应给客户端是，会先将其转化为 json格式
+        //再响应给客户端
+    }*/
+
+
+    private UserService userService = new UserServiceImpl();
+
+    @RequestMapping("/list")
+    public List<User> list() throws  Exception {
+        //1.调用service层方法，获取用户数据
+        List<User> userList = userService.findAll();
+
+        //2.返回数据（json）
         return  userList;
         //服务器在将这个对象或者集合响应给客户端是，会先将其转化为 json格式
         //再响应给客户端
