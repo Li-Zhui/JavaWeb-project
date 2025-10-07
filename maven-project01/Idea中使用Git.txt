@@ -1,0 +1,46 @@
+一、在idea中配置Git
+    安装好Intellij IDEA后，如果Git安装在默认路径下，那么idea
+    会自动找到git的位置，如果更改了Git的安装位置则需要手动配置
+    下Git的路径。选择File→Settings打开设置窗口，找到Version Control下的git选项
+
+
+二、附：几条铁令
+  1.切换分支前先提交本地的修改
+  2.代码及时提交，提交过了就不会丢
+  3.遇到任何问题都不要删除文件目录，第1时间找老师
+
+
+三、windows下无法创建.ignore | .bashrc文件
+    这里以创建.ignore文件为例：
+    在git目录下打开gitbash
+    执行指令touch.gitignore
+
+
+四、重要指令：
+    工作流程图上的7个指令（clone+fetch+pull+checkout+add+commit+push）
+    和2个常用指令(log+merge)
+  常用指令速查：
+  - 基本操作类:
+      git init
+                     初始化仓库
+      git-log
+                     查看日志，这个命令很重要！！！！！！！！！！
+      git add <文件名|>
+                     添加到暂存区
+      git commit -m '注释'
+                    提交到仓库
+      git merge <分支名>
+                    合并指定分支到当前活跃分支
+  -分支切换类：
+      git checkout <分支名>
+                    切换到某个分支
+      git checkout -b <分支名>
+                    创建并切换到某个分支 (分支原来不存在)
+  -远程操作
+      git clone<远程地址> [本地文件夹]
+                     clone远程仓库到本地
+      git pull
+                     拉取远端仓库的修改并合并
+      git push [--set-upstream] origin 分支名
+                     推送本地修改到远端分支
+                     --set-upstream表示和远端分支绑定关联关系，只有第一次推送时才需要此参数
