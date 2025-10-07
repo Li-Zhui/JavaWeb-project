@@ -43,3 +43,17 @@
 
     3.内嵌的tomcat
         将web开发所集成进来的tomcat服务器也称之为内嵌的tomcat
+
+
+六、RestController注解
+    1.其底层封装了一个叫@ResponseBody的注解
+        -> 作用：将controller返回值直接作为响应体的数据直接响应；
+                返回值是对象/集合->json->响应
+
+    2.小结
+        2.1 静态资源文件存放位置
+            resources/static
+        2.2 @ResponseBody注解的作用
+            将controller方法的返回值直接写入HTTP响应体
+            如果是对象或集合，会先转为json，再响应
+            @RestController = @Controller + @ResponseBody
