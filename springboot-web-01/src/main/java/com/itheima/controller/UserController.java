@@ -4,6 +4,7 @@ import cn.hutool.core.io.IoUtil;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
 import com.itheima.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,8 +47,8 @@ public class UserController {
         //再响应给客户端
     }*/
 
-
-    private UserService userService = new UserServiceImpl();
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/list")
     public List<User> list() throws  Exception {

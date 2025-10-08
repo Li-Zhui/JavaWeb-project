@@ -4,13 +4,19 @@ import com.itheima.dao.UserDao;
 import com.itheima.dao.impl.UserDaoImpl;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+
+@Component
+//代表将当前类交给IOC容器管理
 public class UserServiceImpl implements UserService {
-    private UserDao userDao = new UserDaoImpl();
+    @Autowired
+    private UserDao userDao;
     @Override
     public List<User> findAll() {
         //1.调用dao层方法，获取用户数据
