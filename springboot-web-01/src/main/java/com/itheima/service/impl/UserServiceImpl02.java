@@ -1,21 +1,20 @@
 package com.itheima.service.impl;
 
 import com.itheima.dao.UserDao;
-import com.itheima.dao.impl.UserDaoImpl;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+//@Primary
 @Service
 //代表将当前类交给IOC容器管理
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl02 implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
