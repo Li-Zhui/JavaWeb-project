@@ -1,0 +1,27 @@
+一、什么是数据库？
+    1.数据库：
+        DataBase（DB），是存储和管理数据的仓库。
+
+    2.数据库管理系统：
+        DataBase ManagementSystem（DBMS），操纵和管理数据库的大型软件。
+
+    3.SQL:
+        StructuredQueryLanguage，操作关系型数据库的编程语言，
+        定义了一套操作关系型数据库统一标准。
+
+
+二、数据库产品
+    Oracle                  收费的大型数据库，Oracle公司的产品。
+
+    MySQL                   开源免费的中小型数据库。Sun么司收购了MySQL，
+                            Oracle收购Sun公司。
+
+    SQL ServerMicroSoft     公司收费的中型的数据库。C#、 .net等语言常使用。
+
+    PostgreSQL              开源免费中小型的数据库。
+
+    DB2IBM                  公司的大型收费数据库产品。
+
+    SQLite                  嵌入式的微型数据库。如：作为Android内置数据库
+
+    MariaDB                 开源免费的中小型的数据库。
