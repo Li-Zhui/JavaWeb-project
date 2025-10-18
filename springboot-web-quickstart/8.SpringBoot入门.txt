@@ -57,3 +57,12 @@
             将controller方法的返回值直接写入HTTP响应体
             如果是对象或集合，会先转为json，再响应
             @RestController = @Controller + @ResponseBody
+
+七、POJO对象
+    1.定义
+        POJO（Plain Old Java Object）是指普通的Java对象，具有以下特点：
+    2.基本特征
+      2.1 简单的Java类，不继承特定类或实现特定接口
+      2.2 不依赖特定框架或容器
+      2.3 包含私有字段和公共的getter/setter方法
+      2.4 通常用于表示数据模型

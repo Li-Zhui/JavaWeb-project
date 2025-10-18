@@ -1,0 +1,105 @@
+一、什么是数据库？
+    1.数据库：
+        DataBase（DB），是存储和管理数据的仓库。
+
+    2.数据库管理系统：
+        DataBase ManagementSystem（DBMS），操纵和管理数据库的大型软件。
+
+    3.SQL:
+        StructuredQueryLanguage，操作关系型数据库的编程语言，
+        定义了一套操作关系型数据库统一标准。
+
+
+二、数据库产品
+    Oracle                  收费的大型数据库，Oracle公司的产品。
+
+    MySQL                   开源免费的中小型数据库。Sun么司收购了MySQL，
+                            Oracle收购Sun公司。
+
+    SQL ServerMicroSoft     公司收费的中型的数据库。C#、 .net等语言常使用。
+
+    PostgreSQL              开源免费中小型的数据库。
+
+    DB2IBM                  公司的大型收费数据库产品。
+
+    SQLite                  嵌入式的微型数据库。如：作为Android内置数据库
+
+    MariaDB                 开源免费的中小型的数据库。
+
+
+三、MySQL安装与配置
+    1.添加环境变量
+        环境变量里面有很多选项，这里我们只用到Path这个参数。为什么在初始化的开始要添加环境变量呢？
+        在黑框（即CMD）中输入一个可执行程序的名字，Windows会先在环境变量中的Path所指的路径中寻找一遍，
+        如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是
+        能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。
+      配置后可在命令行运行 mysql 命令看看是否配置成功。
+
+    2.初始化
+      以管理员身份，运行命令行窗口：
+        mysqld --initialize-insecure
+      初始化之后MySQl的安装目录下会多出一个data文件
+      这个data目录就是MySQL的数据存放目录
+
+    3.注册MySQL服务
+      命令行（注意必须以管理员身份启动）中，输入如下的指令，回车执行：
+        mysqld -install
+
+    4.启动MySQL服务
+      在黑框里敲入net start mysql，回车。
+        net start mysql//启动mysql服务
+        net stop mysql//停止mysql服务
+
+    5.修改默认账户密码
+      在黑框里敲入mysqladmin-urootpassword1234，这里的1234
+      就是指默认管理员（即root账户）的密码，可以自行修改成你喜欢的。
+        mysqladmin -u root password 密码（当前为112445）
+
+    6.登录
+      6.1 右键开始菜单，选择命令提示符，打开黑框。
+
+      6.2 在黑框中输入，mysq1-uroot-p112445，回车，出现下图且左下角为mysql>，则登录成功。
+                    mysql -uroot -p112445
+
+            6.2.1 语法：mysql-u用户名-p密码 （这两个参数可以不写）［-h数据库服务器IP地址-P端口号]
+                    mysql -uroot -p
+
+            6.2.2 使用这个指令再输入密码就会让密码呈现***形式，以此确保安全
+
+            6.2.3 如果两个参数省略了即：
+                    mysql
+                  就会默认访问本机的3306端口的MySQL
+
+    7.退出数据库
+      exit
+
+
+四、MySQL数据模型
+   1.关系型数据库：
+        建立在关系模型基础上，由多张相互连接的二维表（有行有列的表）组成的数据库。
+
+   2.特点：
+        2.1 使用表存储数据，格式统一，便于维护。
+        2.2 使用SQL语言操作，标准统一，使用方便，可用于复杂查询。
+
+   3.小结：
+        3.1 什么是关系型数据库？
+            由多张二维表组成的数据库（RDBMS）
+            （DBMS指数据库管理系统，RDBMS指的就是关系型数据库管理系统）
+        3.2 数据是如何在数据库中存储的？
+            数据库->表->数据(记录)
+
+五、MySQL客户端工具-图形化工具
+    1.四大常用工具：
+        SQLyog          Navicat
+        IntelljIDEA     DataGrip
+
+    2.DataGrip介绍：
+        DataGrip是JetBrains旗下的一款数据库管理工具，
+        是管理和开发MySQL、Oracle、PostgreSQL的理想解决方案。
+
+    3.DataGrip官网:
+        https://www.jetbrains.com/zh-cn/datagrip/
+
+    4.DataGrip安装：
+        参考资料中提供的《DataGrip安装手册》

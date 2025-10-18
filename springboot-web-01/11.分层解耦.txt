@@ -1,0 +1,157 @@
+一、三层架构
+    1.controller:
+        控制层，接收前端发送的请求，对请求进行处理，并响应数据。
+      service：
+        业务逻辑层，处理具体的业务逻辑。
+      dao：
+        数据访问层(Data AccessObject）（持久层），负责数据访问
+        操作，包括数据的增、删、改、查。
+
+    2.单一职责原则：
+      一个类、接口或者方法尽量只做一件事情，只管一块功能
+
+    3.小结
+        3.1 为什么要对代码进行拆分？
+            遵循单一职责原则，便于复用、后期维护
+        3.2 拆分为了哪三层？每每一层的职责是什么？
+            controller：接受请求，响应数据
+            service：逻辑处理
+            dao:娄数据访问
+
+二、分层解耦
+    1.低耦合高内聚
+        1.1 耦合：
+            衡量软件中各个层/各个模块的依赖关联程度，
+        1.2 内聚：
+            软件中各个功能模块内部的功能联系
+        1.3 软件设计原则：
+            高内聚低耦合。
+            高内聚指一个类专注做好一件事，低耦合指类之间依赖关系简单清晰
+
+    2.控制反转和依赖注入
+        2.1 控制反转：
+            InversionOfControl，简称IOC。Spring框架的第一大核心
+            对象的创建控制权由程序自身转移到外部（容器），这种思想称为控制反转。
+            （这个容器称为Spring容器或IOC容器）
+        2.2 依赖注入：
+            Dependency Injection，简称DI。容器为应用程序提供运行时，
+            所依赖的资源，称之为依赖注入。
+        2.3 Bean对象：
+            IOC容器中创建、管理的对象，称之为Bean。
+
+    3.小结
+        实现分层解耦的思路是什么？
+            将项目中的类交给IOC容器管理（IO，控制反转）
+            应用程序运行时需要什么对象，直接依赖容器为其提供（DI，依赖注入）
+
+
+三、IOC&DI入门
+    1．将Dao及Service层的实现类，交给Ioc容器管理
+        实现：
+             在实现类的上面加上 @Component 注解。
+                代表将当前类交给IOC容器管理。
+
+    2．为Controller及Service注入运行时所依赖的对象，
+        实现：
+             在对应未初始化的成员变量上加上 @Autowired 注解
+                 代表程序在运行中会自动找到这个类型的Bean对象，并
+                 赋值给这个成员变量。
+
+    3.小结
+        3.1 如何将一个类交给IOC容器管理?
+            @Component(注意：是加在实现类上，而非接口上)
+        3.2 如何从Ioc容器中找到该类型的bean,然后完成依赖注入？
+            @Autowired
+
+
+四、IOC详解
+  1.要把某个对象交给IOC容器管理，需要在对应的类上加上如下注解之一：
+      注解             说明              位置
+  @Component     声明bean的基础注解     不属于以下三类时，用此注解
+  @Controller   @Component的衍生注解    标注在控制层类上
+  @Service      @Component的衍生注解    标注在业务层类上
+  @Repository   @Component的衍生注解    标注在数据访问层类上（由于与mybatis整合，用的少）
+    注意：
+        a.@RestController注解中包含了@Controller注解
+        b.声明bean的时候，可以通过注解的value属性
+          指定bean的名字，如果没有指定，默认为类名首字母小写。
+
+  2.组件扫描
+    2.1 前面声明bean的四大注解，要想生效，还需要被组件扫描注解@ComponentScan扫描。
+    2.2 该注解虽然没有显式配置，但是实际上已经包含在了启动类声明注解
+        @SpringBootApplication 中，默认扫描的范围是启动类所在包及其子包。
+
+  3.小结
+    3.1 声明bean的注解有哪几个?
+        @Controller
+        @Service
+        @Repository
+        @Component
+    3.2 注意事项
+        在Springboot集成web开发中，声明控制器bean只能用@Controller。
+        声明bean的注解要想生效，需要被扫描到，启动类默认扫描当前包及其子包。
+
+
+五、DI详解
+    1.基于@Autowired进行依赖注入的常见方式有如下三种：
+        1.1.属性注入：
+           1.1.1 实现：
+                在对应未初始化的成员变量（成员对象）上加上 @Autowired 注解
+           1.1.2 优缺点：
+                优点：代码简洁、方便快速开发
+                缺点：隐藏了类之间的依赖关系、可能会破坏类的封装性
+
+        1.2.构造器注入：
+            1.2.1 实现：
+                声明一个有参构造，将需要的Bean对象通过形参列表在方法
+                体中为成员变量（成员对象）赋值（this.成员变量 = Bean对象形参）
+            1.2.2 优缺点：
+                优点：能清晰地看到类的依赖关系、提高了代码的安全性。
+                缺点：代码繁琐、如果构造参数过多，可能会导致构造函数臃肿
+            1.2.3 注意：
+                a.如果当前类中只存在一个构造函数，那么就可以省略 @Autowired 注解
+                    省略掉之后，当在构造这个类时，自动到IOC容器中查找参数类型的Bean对象，
+                    然后将Bean对象赋值给形参。
+                b.成员变量可以声明为final。
+
+        1.3.setter方法注入
+            1.3.1 实现：
+                将构造方法换成setter方法。
+            1.3.2 优缺点：
+                优点：保持了类的封装性，依赖关系更清晰。
+                缺点：需要额外编写setter方法，增加了代码量。
+
+    2.如果同类型的bean存在多个
+        2.1 @Autowired注解，默认是按照类型进行注入的
+            如果存在多个相同类型的bean，将会报错
+
+        2.2解决方案：
+            2.2.1 方案一：@Primary
+                要注入那个Bean，就在那个类上加上@Primary注解
+                    @Primary
+                    @Service
+                    public class UserServiceImpl implements UserService {
+                        @Override
+                        public List<User> list(){
+                        //省略.....
+                        }
+                    }
+            2.2.2 方案二：@Qualifier
+                配合@Autowired注解，在其下添加此注解，在其value
+                属性中标明需要的Bean的名字
+                    @RestController
+                    public class UserController{
+                        @Autowired
+                        @Qualifier("userServiceImpl")
+                        private UserService userService;
+                    }
+            2.2.3 方案三：@Resource
+                通过此注解声明Bean的名称，相当与@Autuwired加上@Qualifier
+                    @RestController
+                    public class UserController {
+                        @Resource(namee = "userServiceImpl")
+                        private UserService userService;
+                    }
+        2.3 注意：
+            @Autowired是Spring框架提供的注解，而@Resource是JavaEE规范提供的
+            @Autowired默认是按照类型注入，而@Resource默认是按照名称注入
