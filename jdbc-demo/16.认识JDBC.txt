@@ -8,10 +8,11 @@
 
 
 二、JDBC-入门程序
-  1.需求；
-        基于JDBc程序，执行update语句 (update user set age = 25 where id = 1)
-  2.步骤：
-        2.1 准备工作：
+    1.DML语句
+        1.1 需求；
+            基于JDBc程序，执行update语句 (update user set age = 25 where id = 1)
+        1.2 步骤：
+            1.2.1 准备工作：
                 创建一个maven项目，引入依赖（mysql的驱动，即MySQL对于JDBC的实现），
                     <dependency>
                         <groupId>com.mysql</groupId>
@@ -19,7 +20,8 @@
                         <version>8.0.33</version>
                     </dependency>
                 并准备数据库表user。
-        2.2 代码实现：
+
+            1.2.2 代码实现：
                 编写JDBC程序，操作数据库
                     //1．注册驱动（告诉程序要使用那一套JDBC的实现）
                         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,3 +37,104 @@
                     //5．释放资源（将执行对象及连接对象释放）
                         statement.close();
                         connection.close();
+
+        1.3 执行SQL语句返回的结果
+                    int rowsAffected = statement.executeUpdate();
+                    这个int类型的rowsAffected表示受影响的记录数
+
+    2.DQL语句
+        2.1 需求：
+                基于JDBC执行如下select语句，将查询结果封装到User对象中。
+            SQL:
+                select * from user where username = 'daqiao' and password = '123456'
+        2.2 ResultSet（结果集对象）：
+                2.2.1 ResultSet rs = statement.executeQuery()
+                    next()：
+                        将光标从当前位置向前移动一行，并判断当前行是否为有效行，返回值为boolean。
+                        true：
+                            有效行，当前行有数据
+                        false：
+                            无效行，当前行没有数据
+                    getXxx(….)：
+                        获取数据，可以根据列的编号获取，也可以根据列名获取（推荐）。
+
+                2.2.2 结果解析步骤：
+                    while(resultSet.next()){
+                        int id = resultSet.getInt("id");
+                        //...省略
+                    }
+
+    3.小结：
+        3.1 JDBC程序执行DML语句？ DQL语句?
+            DML语句:
+                int rowsAffected = statement.executeUpdate();
+            DQL语句:
+                ResultSet rs = statement.executeQuery();
+        3.2 DQL语句执行完毕结果集ResultSet解析？
+            resultSet.next()：
+                光标往下移动一行
+            resultSet.getXxx()：
+                获取字段数据
+
+
+ 三、预编译SQL
+    1.静态SQL与预编译SQL
+        1.1 静态SQL的使用
+
+            1.1.1 对象
+                    创建的是Statement对象
+
+            1.1.2 对象的创建
+                    直接使用Connection对象的createStatement()方法创建
+
+            1.1.3 SQL语句的参数
+                    将SQL语句中的参数写死
+
+            1.1.4 SQL语句的执行
+                    直接将SQL语句写入Statement对象的执行方法中
+                    然后用一个int类型的数据接收执行方法返回的受影响的记录数
+
+        1.2 预编译SQL的使用
+
+            1.2.1 对象
+                    创建的是PreparedStatement对象
+
+            1.2.2 对象的创建
+                    在创建PreparedStatement对象时将SQL语句作为参数写入
+                    Connection对象的prepareStatement方法
+
+            1.2.3 SQL语句的参数
+                    将SQL语句中的参数用'?'这个占位符表示
+
+            1.2.4 SQL语句的执行
+                    首先调用PreparedStatement对象的 set系列() 方法传入参数
+                    然后调用PreparedStatement对象无参的执行方法
+                    最后用一个ResultSet对象接收执行方法返回的结果集对象
+
+    2.优势
+        2.1 优势一：
+                可以防止SQL注入，更安全
+
+            SQL注入：
+                通过控制输入来修改事先定义好的SQL语句，以达到执行代码对服务器进行攻击的方法。
+
+        2.2 优势二：
+                性能更高
+
+            SQL语句在数据库中的执行流程：
+                SQL语法解析检查
+                优化SQL
+                编译SQL
+                将编译后的结果缓存
+                执行SQl
+
+            由于参数不一致，以下三条静态SQL语句会被 检查-》优化-》编译-》缓存三次
+                delete from user where id=1;
+                delete from user where id=2;
+                delete from user where id=3;
+
+            而如果是预编译SQL，以下只需要 检查-》优化-》编译-》缓存一次 第二次使用时会从缓存区中拿出来直接使用
+                delete from user where id= ? ;
+                1
+                2
+                3
