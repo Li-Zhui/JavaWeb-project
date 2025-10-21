@@ -1,0 +1,53 @@
+一、什么是MyBatis
+    1.MyBatis是一款优秀的持久层（dao层）框架，用于简化JDBC的开发。
+
+    2.MyBatis本是Apache的一个开源项目iBatis，2010年这个项目由apache迁移到了google code，并且改名为MyBatis。
+      2013年11月迁移到Github。
+
+    3.官网:
+        https://mybatis.org/mybatis-3/zh_CN/index.htm
+
+
+二、使用Mybatis查询所有用户数据
+    1.准备工作：
+        1.1 创建SpringBoot工程、引l入M ybatis相关依赖
+        1.2 准备数据库表user、实体类User
+        1.3 配置Mybatis（在application.properties中数据库连接信息）
+                数据库连接信息四要素：
+                    a.数据库连接的url地址
+                        例如：spring.datasource.url=jdbc:mysql://localhost:3306/web
+                    b.数据库驱动的全类名
+                        例如：spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+                    c.用户名
+                        例如：spring.datasource.username=root
+                    d.密码
+                        例如：spring.datasource.password=1234
+
+    2.编写Mybatis程序：编写Mybatis的持久层接口，定义SQL（注解/XML）
+        2.1 命名：
+                @Mapper
+                public interface ...Mapper{
+                    @Select("查询语句")
+                    public List<User> findAll();
+
+                        //findAll()一旦运行就会自动执行Select注解中的这条查询语句
+                        //并且将查询返回的结果自动封装到这个方法的返回值中
+                        //每一条数据都会封装到User对象中，多个用户对象会自动封装到这个List集合中
+                }
+
+        2.2 注解解析
+                2.2.1 @Mapper
+                        应用程序在运行时，会自动的为该接口创建一个实现类对象（代理对象）
+                        并且会自动将该实现类对象存入IOC容器 - bean 。
+                2.2.2 @SpringBootTest
+                        SpringBoot单元测试的注解 - 当前测试类中的测试方法运行时，
+                        会启动springboot项目 - 一旦启动IOC容器就创建好了
+
+        2.3 提示：
+            Mybatis的持久层接口命名规范为 XxxMapper，也称为 Mapper接口。
+
+        2.4注意：
+            测试类所在包需要与引导类包名相同（或放在引导类所在包的子包下）
+                即SpringbootMybatisQuickstartApplicationTests
+                和SpringbootMybatisQuickstartApplication
+                的包名要相同（都为com.itheima）
