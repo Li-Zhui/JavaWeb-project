@@ -10,7 +10,7 @@
 
 二、使用Mybatis查询所有用户数据
     1.准备工作：
-        1.1 创建SpringBoot工程、引l入M ybatis相关依赖
+        1.1 创建SpringBoot工程、引入MyBatis相关依赖
         1.2 准备数据库表user、实体类User
         1.3 配置Mybatis（在application.properties中数据库连接信息）
                 数据库连接信息四要素：
@@ -23,7 +23,7 @@
                     d.密码
                         例如：spring.datasource.password=1234
 
-    2.编写Mybatis程序：编写Mybatis的持久层接口，定义SQL（注解/XML）
+    2.编写MyBatis程序：编写MyBatis的持久层接口，定义SQL（注解/XML）
         2.1 命名：
                 @Mapper
                 public interface ...Mapper{
@@ -44,7 +44,7 @@
                         会启动springboot项目 - 一旦启动IOC容器就创建好了
 
         2.3 提示：
-            Mybatis的持久层接口命名规范为 XxxMapper，也称为 Mapper接口。
+            MyBatis的持久层接口命名规范为 XxxMapper，也称为 Mapper接口。
 
         2.4注意：
             测试类所在包需要与引导类包名相同（或放在引导类所在包的子包下）
@@ -93,3 +93,31 @@
 
 
 五、Mybatis-数据库连接池
+    1.认识
+        1.2 是什么
+                数据库连接池是个容器，负责分配、管理数据库连接（Connection）。
+        1.2 作用
+                它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个。
+        1.3 性质
+                释放（归还给连接池）空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接遗漏。
+        1.4 优势：
+                资源重用
+                提升系统响应速度
+                避免数据库连接遗漏（有些客户端获取到连接时让这个连接一直处于空闲状态）
+
+    2.实现数据库连接池
+        2.1 标准接口：
+                DataSource
+            官方(sun)提供的数据库连接池接口，由第三方组织实现此接口。
+            功能（方法）：从数据库连接池中获取一个连接     Connection getConnection() throws SQLException;
+        2.2 市面上数据库连接池产品：
+            2.2.1 目前不常用：
+                C3P0
+                DBCP
+            2.2.2 企业常用：
+                a. Druid（德鲁伊连接池）
+                        Druid连接池是阿里巴巴开源的数据库连接池项目
+                        功能强大，性能优秀，是JaVa语言最好的数据库连接池之一
+                b. Hikari （追光者连接池 SpringBoot默认自带）
+    3.切换线程池
+        如图（切换线程池）
