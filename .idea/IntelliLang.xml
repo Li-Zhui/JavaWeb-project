@@ -50,14 +50,6 @@
       <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("withHeader", "getHeader", "getFirstHeader", "containsHeader", "removeHeader").definedInClass("org.mockserver.model.HttpResponse"))]]></place>
     </injection>
     <injection language="SQL" injector-id="java">
-      <display-name>MyBatis @Select/@Delete/@Insert/@Update</display-name>
-      <single-file value="true" />
-      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Delete")]]></place>
-      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Insert")]]></place>
-      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Select")]]></place>
-      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Update")]]></place>
-    </injection>
-    <injection language="SQL" injector-id="java">
       <display-name>QueryProducer (org.hibernate.query)</display-name>
       <single-file value="true" />
       <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("createNativeQuery").definedInClass("org.hibernate.query.QueryProducer"))]]></place>
@@ -107,6 +99,14 @@
       <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("header", "getHeader", "headers").definedInClass("io.restassured.response.ResponseOptions"))]]></place>
       <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("header", "getHeader", "headers").definedInClass("io.restassured.response.ValidatableResponseOptions"))]]></place>
       <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("header", "headers").definedInClass("io.restassured.specification.RequestSpecification"))]]></place>
+    </injection>
+    <injection language="MySQL" injector-id="java">
+      <display-name>Select.value (org.apache.ibatis.annotations)</display-name>
+      <single-file value="true" />
+      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Delete")]]></place>
+      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Insert")]]></place>
+      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Select")]]></place>
+      <place><![CDATA[psiMethod().withName("value").withParameters().definedInClass("org.apache.ibatis.annotations.Update")]]></place>
     </injection>
     <injection language="SQL" injector-id="java">
       <display-name>Session.createNativeQuery (org.hibernate)</display-name>
