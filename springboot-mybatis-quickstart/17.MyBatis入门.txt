@@ -67,7 +67,7 @@
                 在idea中配置MySQL数据库连接（需要具体指明项目开发所需数据库具体是什么）
 
     2.配置Mybatis的日志输出
-        2.1 默认情况下，在Mybatis中，SQL语句执行时，我们并看不到SQL语句的执行日志。
+        2.1 默认情况下，在Mybatis中，SQL语句执行时，我们并不能看到SQL语句的执行日志。
             在main包下的resources包的application.properties类加入如下配置，即可查看日志：
                 #mybatis的配置
                 mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
@@ -121,3 +121,26 @@
                 b. Hikari （追光者连接池 SpringBoot默认自带）
     3.切换线程池
         如图（切换线程池）
+
+
+六、增删改查操作
+    1.删除用户-delete
+        需求：
+            根据ID删除用户信息
+        SQL；
+            delete from user where id =5；
+    2.@Delete（sql语句注解）
+        @Delete（"delete from user where id = #{id}")
+        public void deleteById(Integer id);
+            2.1 #{}
+                这个占位符表示表示最终里面的值是要被替代掉的
+            2.2 deleteById中的id传进来是多少最终被替代的就是多少
+                最终在执行时#{}会被替代成 ‘？’ 这个占位符，即最终成为一个预编译sql
+
+    3.注意：
+        DML语句执行完毕的返回值，表示该DML语句执行完毕影响的行数。
+
+    4.Mybatis中的 # 号与 $ 号：
+       符号                        说明                                    场景                       优缺点
+      #{...}       占位符。执行时，会将#{。..}替换为？，生成预编译SQL         参数值传递                安全、性能高高 (推荐)
+      ${...]       拼接符。直接将参数拼接在SQL语句中，存在SQL注入问题     表名、字段名动态设置时使用       不安全、性能低

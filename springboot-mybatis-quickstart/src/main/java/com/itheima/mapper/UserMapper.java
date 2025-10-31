@@ -1,6 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,4 +15,10 @@ public interface UserMapper {
      */
     @Select("select id, username, password, name, age from user")
     public List<User> findAll();
+
+    /**
+     * 根据id删除用户
+     */
+    @Delete("delete from user where id = #{id}")
+    public Integer deleteById(Integer id);
 }

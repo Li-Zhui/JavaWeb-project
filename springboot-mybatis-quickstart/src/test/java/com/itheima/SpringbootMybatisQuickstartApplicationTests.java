@@ -21,4 +21,12 @@ class SpringbootMybatisQuickstartApplicationTests {
         userList.forEach(System.out::println);
     }
 
+    /**
+     *测试删除
+     */
+    @Test
+    public void testDeleteById() {
+        Integer i = userMapper.deleteById(5);
+        System.out.println("执行完毕后影响的记录数：" + i);
+    }
 }
