@@ -15,6 +15,9 @@ class SpringbootMybatisQuickstartApplicationTests {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 测试查询所有用户
+     */
     @Test
     public void testFindAll() {
         List<User> userList = userMapper.findAll();
@@ -28,5 +31,24 @@ class SpringbootMybatisQuickstartApplicationTests {
     public void testDeleteById() {
         Integer i = userMapper.deleteById(5);
         System.out.println("执行完毕后影响的记录数：" + i);
+    }
+
+    /**
+     * 测试添加用户
+     */
+    @Test
+    public void testInsert() {
+        User user = new User(null,"gaoyuanyuan","112445","高圆圆",18);
+        userMapper.insert(user);
+        //执行之后数据库中id自增为6（虽然4和5已经被删除了但是它存在过）
+    }
+
+    /**
+     * 测试更新用户
+     */
+    @Test
+    public void testUpdate() {
+        User user = new User(1,"zhouyu","112445","周瑜",20);
+        userMapper.update(user);
     }
 }

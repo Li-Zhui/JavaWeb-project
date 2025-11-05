@@ -12,6 +12,7 @@
         1.1 需求；
             基于JDBc程序，执行update语句 (update user set age = 25 where id = 1)
         1.2 步骤：
+
             1.2.1 准备工作：
                 创建一个maven项目，引入依赖（mysql的驱动，即MySQL对于JDBC的实现），
                     <dependency>

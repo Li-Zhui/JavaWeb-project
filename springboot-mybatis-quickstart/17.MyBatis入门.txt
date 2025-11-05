@@ -123,7 +123,7 @@
         如图（切换线程池）
 
 
-六、增删改查操作
+六、MyBatis--增删改查操作--删除操作
     1.删除用户-delete
         需求：
             根据ID删除用户信息
@@ -140,7 +140,35 @@
     3.注意：
         DML语句执行完毕的返回值，表示该DML语句执行完毕影响的行数。
 
-    4.Mybatis中的 # 号与 $ 号：
+    4.MyBatis中的 # 号与 $ 号：
        符号                        说明                                    场景                       优缺点
       #{...}       占位符。执行时，会将#{。..}替换为？，生成预编译SQL         参数值传递                安全、性能高高 (推荐)
       ${...]       拼接符。直接将参数拼接在SQL语句中，存在SQL注入问题     表名、字段名动态设置时使用       不安全、性能低
+
+
+七、MyBatis--增删改查--增加操作
+    1.新增用户-insert
+        需求：
+            添加一个用户
+        SQL:
+            insert into user(username,password,name,age） values('zhouyu','123456','周瑜',20);
+
+    2.Mapper接口：
+        2.1 写死的代码：
+            @Insert("insert into user(username,password,name,age)values('zhouyu',，'123456'，‘周瑜'，20)")
+            public void insert();
+        2.2 正常代码（将各个属性传入到一个User对象中去）：
+            @Insert("insert into user(username,password,name,age) values(#{username},#{password},#{name},#{age})")
+            public void insert(User user);
+
+
+八、MyBatis--增删改查--修改操作
+    1.修改用户-update
+        需求：
+            根据ID更新用户信息
+        SQL:
+            update user set username = 'zhouyu'，password = '123456'，name ='周瑜'，age = 20 where id = 1;
+
+    2.Mapper接口:
+      @Update("update user set username=#{username}，password=#{password}，name=#{name}，age=#{age} where id=#{id}")
+      public void update(User user);
