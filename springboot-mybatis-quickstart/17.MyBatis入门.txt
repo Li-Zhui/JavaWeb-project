@@ -172,3 +172,39 @@
     2.Mapper接口:
       @Update("update user set username=#{username}，password=#{password}，name=#{name}，age=#{age} where id=#{id}")
       public void update(User user);
+
+
+九、MyBatis--增删改查--查询操作
+    1.查询用户-select
+        需求：
+            根据用户名和密码查询用户信息
+        SQL：
+            select * from user where username = 'zhouyu' and password = '666888';
+
+    2.Mapper接口:
+        @Select("select * from user where username=#{username} and password=#{password}")
+        public User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+            //1.因为参数只有两个，所以直接定义两个形参就可以
+            //2.由于username唯一，所以查询出来的数据只有一条，因此就不用List集合装而直接返回user对象
+
+
+十、接口方法涉及多个形参
+
+    1.由于java在默认情况下，我们在编译接口方法时，方法中的形参名称最终由java文件编译成
+      class字节码文件时不会保留（即字节码文件中不能知道形参叫什么，只知道形参类型），这
+      样sql语句最终在获取参数时不能知道哪个是需要的参数。
+          因此如果我们在接口方法中传递多个参数时，
+          需要给这些参数起名字：
+            @Param注解：这个注解的作用就是给接口的方法形参起名字的
+
+    2.说明：
+        基于官方骨架创建的springboot项目中，接口编译时会保留方法形参名，
+        @Param注解可以省略（#{形参名}）。
+        2.1 例如：
+            @Select("select * from user where username=#{uname} and password=#{pwd}")
+            public User findByUsernameAndPassword(String uname, String pwd);
+
+        2.2 原因：
+            在基于springboot官方骨架创建的这个项目中 xml 配置中有一个父工程，
+            父工程中配置了一个maven编译的插件，这个插件会为我们保留接口方法的
+            形参名称。

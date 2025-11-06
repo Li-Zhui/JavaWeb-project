@@ -51,4 +51,13 @@ class SpringbootMybatisQuickstartApplicationTests {
         User user = new User(1,"zhouyu","112445","周瑜",20);
         userMapper.update(user);
     }
+
+    /**
+     * 测试查询用户
+     */
+    @Test
+    public void testFindByUsernameAndPassword(){
+        User user = userMapper.findByUsernameAndPassword("zhouyu", "112445");
+        System.out.println(user);
+    }
 }

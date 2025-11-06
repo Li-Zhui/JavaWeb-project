@@ -31,4 +31,16 @@ public interface UserMapper {
      */
     @Update("update user set username = #{username},password = #{password}, name = #{name},age = #{age} where id = #{id}")
     public void update(User user);
+
+    /**
+     * 根据用户名和密码查询用户信息
+     */
+    //使用@Param注解（#{@Param中的名称}）
+//    @Select("select * from user where username = #{Username} and password = #{Password}")
+//    public User findByUsernameAndPassword(@Param("Username") String username, @Param("Password") String password);
+
+    //不使用@Param注解（#{形参中的名称}）
+    @Select("select * from user where username = #{username} and password = #{password}")
+    public User findByUsernameAndPassword(String username, String password);
+
 }
