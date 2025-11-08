@@ -11,8 +11,8 @@ public interface UserMapper {
     /**
      * 查询所有用户
      */
-    @Select("select id, username, password, name, age from user")
-    public List<User> findAll();
+    //@Select("select id, username, password, name, age from user")
+    List<User> findAll();
 
     /**
      * 根据id删除用户
