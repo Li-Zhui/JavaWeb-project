@@ -63,4 +63,4 @@
         指定格式（如下）
         @DateTimeFormat(pattern = "yyyy-MM-dd")
     3.具体用法：
-        设置在controller层的方法的方法形参前
+        设置在需要指定日期格式的参数前
