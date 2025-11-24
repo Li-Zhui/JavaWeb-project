@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.itheima</groupId>
-    <artifactId>springboot-web-quickstart</artifactId>
+    <artifactId>二、springboot-web-quickstart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-web-quickstart</name>
     <description>springboot-web-quickstart</description>
