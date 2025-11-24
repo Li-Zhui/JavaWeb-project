@@ -1,0 +1,12 @@
+=====================一、@RequestMapping——对controller层的路径接收优化===================
+    1.最终完整的路径
+        一个完整的请求路径，应该是类上的
+        @RequestMapping 的value属性 + 方法上的 @RequestMapping（或其衍生出来的各个@...Mapping注解）的value属性。
+
+    2.代码的优化：
+        如图
+
+    3.@RequestMapping 注解可以加在哪儿?
+        类上（可选的）
+        方法上
+        一个完整的请求路径= 类上 + 方法上的
