@@ -339,3 +339,26 @@
                     and e.entry_date between #{begin} and #{end}
                 </if>
             </where> order by e.update_time desc
+
+    4.Mybatis提供的标签三：<foreach>
+        4.1 作用
+            循环遍历
+        4.2 使用：
+            <insert id="insertBatch">
+                insert into emp_expr (emp_id, begin, end, company, job) values
+                <foreach collection="exprList" item="expr" separator=",">
+                    (#{expr.empId}, #{expr.begin}, #{expr.end}, #{expr.company}, #{expr.job})
+                </foreach>
+            </insert>
+
+        4.3 <foreach>属性说明：
+            4.3.1 collection：
+                    要遍历的集合名称
+            4.3.2 item：
+                    集合遍历出来的 元素/项 的名字
+            4.3.3 separator（可选）：
+                    每一次循环之间使用的分隔符
+            4.3.4 open（可选）：
+                    遍历开始前拼接的片段
+            4.3.5 close（可选）：
+                    遍历结束后拼接的片段
