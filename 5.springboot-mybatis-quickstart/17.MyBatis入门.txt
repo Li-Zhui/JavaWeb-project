@@ -305,3 +305,37 @@
 
 ==============================十五、注意==============================
     在 MyBatis 中，无论是使用 XML 映射文件 还是 @Select 注解编写 SQL 语句，都不应该在 SQL 末尾加分号 ;
+
+
+
+
+
+==============================十六、动态SQl==========================
+    1.概述（使用场景）：
+        随着用户的输入或外部条件的变化而变化的SQL语句，我们称为动态SQL。
+
+    2.Mybatis提供的标签一：<if>
+        2.1 作用：
+            判断条件是否成立，如果条件为true，则拼接SQL。
+        2.2 具体使用：
+            <if test="gender != null">
+                and e.gender = #{gender}
+            </if>
+
+    3.Mybatis提供的标签二：<where>
+        3.1 作用：
+            根据查询条件，来生成where关键字，如果所以条件不成立就不会生成where关键字。
+            并会自动去除条件前面多余的and或or。
+            （补充）即防止生成 where and name = 1; 这种一个查询条件用上and或or的情况
+        3.2 具体使用：
+            <where>
+                <if test="name != null and name != ''">
+                    e.name like concat('%',#{name},'%')
+                </if>
+                <if test="gender != null">
+                    and e.gender = #{gender}
+                </if>
+                <if test="begin != null and end != null">
+                    and e.entry_date between #{begin} and #{end}
+                </if>
+            </where> order by e.update_time desc
