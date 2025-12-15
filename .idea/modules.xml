@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/maven-project01/1.maven-project01.iml" filepath="$PROJECT_DIR$/maven-project01/1.maven-project01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-web-quickstart/2.springboot-web-quickstart.iml" filepath="$PROJECT_DIR$/springboot-web-quickstart/2.springboot-web-quickstart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-web-01/3.springboot-web-01.iml" filepath="$PROJECT_DIR$/springboot-web-01/3.springboot-web-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdbc-demo/4.jdbc-demo.iml" filepath="$PROJECT_DIR$/jdbc-demo/4.jdbc-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-mybatis-quickstart/5.springboot-mybatis-quickstart.iml" filepath="$PROJECT_DIR$/springboot-mybatis-quickstart/5.springboot-mybatis-quickstart.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web-project.iml" filepath="$PROJECT_DIR$/Web-project.iml" />
     </modules>
   </component>
