@@ -268,3 +268,10 @@
                 语法：limit 起始索引,每页展示记录数
                 注意：项目开发中，前端传递过来的是页码，需要转换为起始索引
                 公式：起始索引 = （页码-1）＊每页展示记录数
+
+    8.其他函数
+        8.1 case()流程控制函数：
+            语法：
+                case 表达式 when value1 then result1 when value2 then result2 ... else ...
+            解释：
+                -- 当case函数中的值为 value1 时取 result1 ... 前面条件都不成立就取else后的值
