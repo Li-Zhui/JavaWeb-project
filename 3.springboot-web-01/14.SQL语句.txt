@@ -272,6 +272,11 @@
     8.其他函数
         8.1 case()流程控制函数：
             语法：
-                case 表达式 when value1 then result1 when value2 then result2 ... else ...
+                case 表达式 when value1 then result1 when value2 then result2 ... else ... end;
             解释：
-                -- 当case函数中的值为 value1 时取 result1 ... 前面条件都不成立就取else后的值
+                -- 当case函数中的值为 value1 时取 result1 ... 前面条件都不成立就取else后的值 最后以end结束
+            实例：
+                select
+                    case job when 1 then '班主任' when 2 then '讲师' when 3 then '学工主管' when 4 then '教研主管' when 5 then '咨询师' else '其他' end,
+                    count(*)
+                from emp group by job;
